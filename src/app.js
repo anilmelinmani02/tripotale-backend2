@@ -1,31 +1,3 @@
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const cors = require('cors');
-
-// const app = express();
-// const port = 3000;
-
-// app.use(bodyParser.json());
-// app.use(cors());
-// let postData = [];
-
-// app.post('/api/itineraryData', (req, res) => {
-//     const receivedData = req.body;
-//     console.log('Received data :', receivedData);  
-//     postData = receivedData;
-//     res.json({ message: 'Data received successfully', postData:postData });
-//   });
-
-//   app.get('/api/itineraryData', (req, res) => {
-//     res.json(postData);
-// });
-// app.listen(port, () => {
-//   console.log(`Server listening at http://localhost:${port}`);
-// });
-
-// ----------------------------------------------------------------------------------------------------------------------------
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -172,16 +144,23 @@ const pune = {
   },
   "highestBudgetOption": 5000,
   "additionalInformation": {
-    "climate": "Tropical wet and dry",
+    "currency": "INR",
+    "city": "Pune",
+    "temprature": "27.24°C",
     "localLanguage": "Marathi",
-    "currencyExchange": "Available at major banks and authorized centers",
-    "triviaQuestion": "Best time to visit Pune is during winter (November to February)"
+    "currencyExchange": "1 USD = INR 83.14"
   },
   "localCuision":[
     "Misal Pav - A spicy and flavorful mixture of sprouts, spices, and crunchy farsan, topped with sev.",
     "Poha - Flattened rice cooked with onions, mustard seeds, and turmeric, garnished with coriander leaves.",
     "Bhakri with Thecha - Traditional Maharashtrian bread served with spicy chutney.", 
     "Sabudana Khichdi - Tapioca pearls cooked with potatoes, peanuts, and spices."
+  ],
+  "highRatedRestaurants":[
+    "Amanora The Fern - An Ecotel Hotel, Pune",
+    "Royal Orchid Central",
+    "The Central Park Hotel, Bund Garden Road, Agarkar Nagar",
+    "Lemon Tree Premier City Center PuneOpens in new window"
   ]
 };
 
