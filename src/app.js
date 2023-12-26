@@ -3,9 +3,12 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const cors = require('cors');
 const app = express();
+const axios = require('axios');
 const port = 8000;
 app.use(bodyParser.json());
 app.use(cors());
+const commentapiUrl = 'https://jsonplaceholder.typicode.com/comments';
+
 
 const allCitiesJson = 'indian-states-cities.json';
 
@@ -150,34 +153,70 @@ const pune = {
     "localLanguage": "Marathi",
     "currencyExchange": "1 USD = INR 83.14"
   },
-  "localCuision":[
+  "localCuision": [
     "Misal Pav - A spicy and flavorful mixture of sprouts, spices, and crunchy farsan, topped with sev.",
     "Poha - Flattened rice cooked with onions, mustard seeds, and turmeric, garnished with coriander leaves.",
-    "Bhakri with Thecha - Traditional Maharashtrian bread served with spicy chutney.", 
+    "Bhakri with Thecha - Traditional Maharashtrian bread served with spicy chutney.",
     "Sabudana Khichdi - Tapioca pearls cooked with potatoes, peanuts, and spices."
   ],
-  "highRatedRestaurants":[
+  "highRatedRestaurants": [
     "Amanora The Fern - An Ecotel Hotel, Pune",
     "Royal Orchid Central",
     "The Central Park Hotel, Bund Garden Road, Agarkar Nagar",
     "Lemon Tree Premier City Center PuneOpens in new window"
+  ],
+  "suggestions": [
+    "Use ride-sharing apps like Ola or Uber for convenient travel within the city.",
+    "Take a heritage walk in the old Pune areas to soak in the historical charm.",
+    "Visit Tulshi Baug for local shopping, known for its vibrant market",
+    "For a serene evening, consider a boat ride in Khadakwasla Dam.",
+    "Explore the nightlife in Koregaon Park for trendy cafes and pubs",
+    "Pune has many Instagram-worthy spots. Keep your camera handy"
+  ],
+
+  "trivia": [
+    {
+      "question": "When is the best time to visit Pune?",
+      "answer": "The best time to visit Pune October to June"
+    },
+    {
+      "question": "What is the official language of Pune?",
+      "answer": "The official language of Pune is Marathi."
+    },
+    {
+      "question": "What is the ideal time for trekking to Sinhagad Fort without extreme weather conditions?",
+      "answer": "The post-monsoon season, from September to November, is the ideal time for trekking to Sinhagad Fort."
+    }
   ]
+
 };
 
 app.post('/api/itineraryData', (req, res) => {
-    const receivedData = req.body;
-    console.log('posted data :', receivedData);  
-    postData = receivedData;
-    let respo = {};
-    if (receivedData?.selectCity[0].toLowerCase()=='pune') {
-      respo = pune
-    }else {
-     respo = {} 
-    }
-    res.json({ message: 'Data received successfully',data :respo });
-  });
+  const receivedData = req.body;
+  console.log('posted data :', receivedData);
+  postData = receivedData;
+  let respo = {};
+  if (receivedData?.selectCity[0].toLowerCase() == 'pune') {
+    respo = pune
+  } 
+  res.json({ message: 'Data received successfully', data: respo });
+});
 
+// comment api data
+app.get('/api/comments', async (req, res) => {
+  try {
+    const commentApi = 'https://jsonplaceholder.typicode.com/comments';
+    const response = await axios.get(commentApi);
+    const responseData = response.data;
 
+    res.json({ message: 'comment data received successfully', data: responseData });
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+// for cities
 app.get('/api/IND/states-cities', (req, res) => {
   fs.readFile(allCitiesJson, 'utf8', (err, data) => {
     if (err) {
