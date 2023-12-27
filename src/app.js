@@ -24,7 +24,11 @@ const pune = {
           "details": "Historic fortification. Explore the grand architecture and learn about its historical significance.",
           "time": "Morning",
           "meal": "Breakfast at local eatery",
-          "image": "../../assets/img/shaniwarwada.jpg"
+          "image": "../../assets/img/shaniwarwada.jpg",
+          "coordinates": {
+            "latitude": "18.52015859",
+            "longitude": "73.85583967"
+          }
         },
         {
           "placeName": "Aga Khan Palace",
@@ -32,14 +36,22 @@ const pune = {
           "details": "Historical and architectural site. Admire the beautiful palace into its historical context.",
           "time": "Afternoon",
           "meal": "Lunch at Maharashtrian restaurant",
-          "image": "../../assets/img/agakhanPune_Palace.jpg"
+          "image": "../../assets/img/agakhanPune_Palace.jpg",
+          "coordinates": {
+            "latitude": "18.552494",
+            "longitude": "73.901456"
+          }
         },
         {
           "placeName": "Osho Ashram",
           "location": "Pune",
           "details": "Serenity and meditation. Experience tranquility at the Osho Ashram, a spiritual retreat.",
           "time": "Evening",
-          "image": "../../assets/img/osho-ashram-pune-3887.jpg"
+          "image": "../../assets/img/osho-ashram-pune-3887.jpg",
+          "coordinates": {
+            "latitude": "18.53705",
+            "longitude": "73.88861"
+          }
         }
       ],
       "nightStayOptions": [
@@ -198,7 +210,7 @@ app.post('/api/itineraryData', (req, res) => {
   let respo = {};
   if (receivedData?.selectCity[0].toLowerCase() == 'pune') {
     respo = pune
-  } 
+  }
   res.json({ message: 'Data received successfully', data: respo });
 });
 
